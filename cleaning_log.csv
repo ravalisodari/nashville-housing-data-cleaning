@@ -1,0 +1,13 @@
+step,issue,action,rows_affected
+1,Column names had trailing space ('UniqueID ') / CamelCase,Stripped and converted to snake_case,19
+2,"Wrong dtypes (mixed str/int ref, float counts)","legal_reference->string, year_built/bedrooms/full_bath/half_bath->Int64, sale_date->datetime",56477
+3,"Extra/double spaces, stray '_x000D_' line breaks","Collapsed whitespace, removed Excel carriage-return artefacts (count = cells changed)",81250
+4,sold_as_vacant mixed 'Y'/'N' with 'Yes'/'No',Standardised to Yes/No,451
+5,land_use typos/abbreviations (39 labels),Merged to 37 canonical labels,1557
+6,Missing property_address,Filled from other sales of the same parcel_id (29 of 29 recovered),29
+7,"Combined address fields (street, city, state in one cell)",Split into property_street/city and owner_street/city/state,56477
+8,"Duplicate sales (same parcel/address/date/price/deed, different unique_id)","Dropped repeats, kept first occurrence",104
+9,"Reviewed, kept as-is: sale_price < $1,000 (possible non-arm's-length / typo)",Documented only (no reliable fix),7
+9,"Reviewed, kept as-is: acreage > 50 (extreme outlier)",Documented only (no reliable fix),4
+9,"Reviewed, kept as-is: bedrooms == 0 on a residential land-use",Documented only (no reliable fix),4
+9,"Reviewed, kept as-is: total_value != land_value + building_value (+/- $1)",Documented only (no reliable fix),7154
